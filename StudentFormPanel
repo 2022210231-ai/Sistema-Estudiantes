@@ -1,0 +1,60 @@
+package com.lab.ui;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class StudentFormPanel extends JPanel {
+
+    public JTextField tfName = new JTextField();
+    public JTextField tfAge = new JTextField();
+
+    public JButton btnAdd = new JButton("Agregar");
+    public JButton btnEdit = new JButton("Editar");
+    public JButton btnDelete = new JButton("Eliminar");
+
+    public StudentFormPanel() {
+        setLayout(new GridBagLayout());
+        setBackground(UITheme.PANEL);
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(5,5,5,5);
+        c.anchor = GridBagConstraints.WEST;
+
+        JLabel lblName = new JLabel("Nombre:");
+        lblName.setFont(UITheme.LABEL_FONT);
+        JLabel lblAge = new JLabel("Edad:");
+        lblAge.setFont(UITheme.LABEL_FONT);
+
+        tfName.setPreferredSize(new Dimension(200, 28));
+        tfAge.setPreferredSize(new Dimension(80, 28));
+
+        btnAdd.setBackground(UITheme.PRIMARY);
+        btnAdd.setForeground(Color.WHITE);
+        btnAdd.setFont(UITheme.BUTTON_FONT);
+
+        btnEdit.setBackground(UITheme.PRIMARY_DARK);
+        btnEdit.setForeground(Color.WHITE);
+        btnEdit.setFont(UITheme.BUTTON_FONT);
+
+        btnDelete.setBackground(new Color(244, 67, 54));
+        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setFont(UITheme.BUTTON_FONT);
+
+        c.gridx = 0; c.gridy = 0; add(lblName, c);
+        c.gridx = 1; add(tfName, c);
+
+        c.gridx = 0; c.gridy = 1; add(lblAge, c);
+        c.gridx = 1; add(tfAge, c);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(UITheme.PANEL);
+        buttonPanel.add(btnAdd);
+        buttonPanel.add(btnEdit);
+        buttonPanel.add(btnDelete);
+
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 2;
+        c.anchor = GridBagConstraints.CENTER;
+        add(buttonPanel, c);
+    }
+}
