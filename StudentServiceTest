@@ -1,0 +1,40 @@
+package com.lab;
+
+import com.lab.model.Student;
+import com.lab.model.StudentModel;
+import com.lab.model.ValidationException;
+import com.lab.service.StudentService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class StudentServiceTest {
+
+    private StudentService service;
+
+    @BeforeEach
+    void setup() {
+        service = new StudentService(new StudentModel());
+    }
+
+    @Test
+    void addAndList() {
+        service.addStudent("Ana",20);
+        service.addStudent("Luis",22);
+        List<Student> all = service.listStudents();
+        assertEquals(2, all.size());
+    }
+
+    @Test
+    void validationName() {
+        assertThrows(ValidationException.class, () -> service.addStudent("", 10));
+    }
+
+    @Test
+    void deleteNonExisting() {
+        assertThrows(ValidationException.class, () -> service.deleteStudent(999));
+    }
+}
