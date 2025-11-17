@@ -1,0 +1,44 @@
+package com.lab.service;
+
+import com.lab.model.Student;
+import com.lab.model.StudentModel;
+import com.lab.model.ValidationException;
+
+import java.util.List;
+
+public class StudentService {
+
+    private final StudentModel model;
+
+    public StudentService(StudentModel model) {
+        this.model = model;
+    }
+
+    public void addStudent(String name, int age) {
+        validate(name);
+        model.add(name, age);
+    }
+
+    public void updateStudent(int id, String name, int age) {
+        validate(name);
+        if (!model.update(id, name, age)) {
+            throw new ValidationException("No se encontró el estudiante a actualizar.");
+        }
+    }
+
+    public void deleteStudent(int id) {
+        if (!model.delete(id)) {
+            throw new ValidationException("No se encontró el estudiante a eliminar.");
+        }
+    }
+
+    public List<Student> listStudents() {
+        return model.listAll();
+    }
+
+    private void validate(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new ValidationException("El nombre no puede estar vacío.");
+        }
+    }
+}
