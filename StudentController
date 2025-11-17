@@ -1,0 +1,37 @@
+package com.lab.controller;
+
+import com.lab.model.ValidationException;
+import com.lab.service.StudentService;
+
+public class StudentController {
+
+    private final StudentService service;
+
+    public StudentController(StudentService service) {
+        this.service = service;
+    }
+
+    public void addStudent(String name, String ageText) {
+        int age = parseAge(ageText);
+        service.addStudent(name, age);
+    }
+
+    public void updateStudent(int id, String name, String ageText) {
+        int age = parseAge(ageText);
+        service.updateStudent(id, name, age);
+    }
+
+    public void deleteStudent(int id) {
+        service.deleteStudent(id);
+    }
+
+    private int parseAge(String text) {
+        try {
+            int age = Integer.parseInt(text.trim());
+            if (age < 1 || age > 120) throw new ValidationException("Edad fuera de rango (1–120).");
+            return age;
+        } catch (NumberFormatException e) {
+            throw new ValidationException("Edad inválida. Debe ser numérica.");
+        }
+    }
+}
