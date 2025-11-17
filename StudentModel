@@ -1,0 +1,40 @@
+package com.lab.model;
+
+import java.util.*;
+
+public class StudentModel {
+    private final List<Student> students = new ArrayList<>();
+    private int nextId = 1;
+
+    public List<Student> listAll() {
+        return Collections.unmodifiableList(new ArrayList<>(students));
+    }
+
+    public Student add(String name, int age) {
+        Student s = new Student(nextId++, name, age);
+        students.add(s);
+        return s;
+    }
+
+    public boolean update(int id, String name, int age) {
+        return students.stream()
+                .filter(x -> x.getId() == id)
+                .findFirst()
+                .map(s -> {
+                    s.setName(name);
+                    s.setAge(age);
+                    return true;
+                }).orElse(false);
+    }
+
+    public boolean delete(int id) {
+        return students.removeIf(s -> s.getId() == id);
+    }
+
+    public Student findById(int id) {
+        return students.stream()
+                .filter(x -> x.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+}
