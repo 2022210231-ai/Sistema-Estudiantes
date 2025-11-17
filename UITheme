@@ -1,0 +1,17 @@
+package com.lab.ui;
+
+import java.awt.*;
+
+public class UITheme {
+
+    public static final Color PRIMARY = new Color(33, 150, 243);
+    public static final Color PRIMARY_DARK = new Color(25, 118, 210);
+    public static final Color BACKGROUND = new Color(245, 245, 245);
+    public static final Color PANEL = new Color(255, 255, 255);
+    public static final Color TABLE_HEADER = new Color(66, 165, 245);
+    public static final Color TABLE_ALT_ROW = new Color(230, 244, 255);
+
+    public static final Font TITLE_FONT = new Font("Segoe UI", Font.BOLD, 22);
+    public static final Font LABEL_FONT = new Font("Segoe UI", Font.PLAIN, 14);
+    public static final Font BUTTON_FONT = new Font("Segoe UI", Font.BOLD, 14);
+}
